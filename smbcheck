@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+        echo "Usage: smbcheck <share>"
+	echo ""
+	echo "Checks for writable directories in smb share using null authentication"
+	echo "Example: smbcheck '//10.10.10.50/department share'"
+        exit 1
+fi
+
+for i in $(smbclient -N "$1" -c "recurse; ls" | grep '^\\')
+do
+	if smbcacls -N "$1" $i | grep -q "Everyone.*FULL"
+	then
+		echo "[+] Found writable directory:" $i
+	fi
+done
