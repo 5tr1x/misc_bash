@@ -1,0 +1,6 @@
+#Alias
+alias uu='apt update && apt full-upgrade && apt autoremove'
+alias http='python3 -m http.server 80'
+alias lcatch='nc -lvnp 443'
+alias wcatch='rlwrap nc -lvnp 443'
+alias psencode='iconv -t utf-16le | base64 -w 0'
