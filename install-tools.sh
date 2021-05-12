@@ -20,6 +20,7 @@ vim
 rusers
 whois
 dnsrecon
+golang
 xfce4-terminal
 python3-pip
 wpscan
