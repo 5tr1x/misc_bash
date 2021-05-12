@@ -20,6 +20,8 @@ vim
 rusers
 whois
 dnsrecon
+xfce4-terminal
+python3-pip
 wpscan
 joomscan
 odat
