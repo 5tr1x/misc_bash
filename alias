@@ -1,6 +1,10 @@
 #Alias
 alias uu='apt update && apt full-upgrade && apt autoremove'
+alias uuu='apt update && apt full-upgrade && apt autoremove && nuclei -ud /opt/tools/nuclei-templates/ -ut && wpscan --update && updatedb && echo "[*] UPDATED" && echo ""'
 alias http='python3 -m http.server 80'
 alias lcatch='nc -lvnp 443'
 alias wcatch='rlwrap nc -lvnp 443'
 alias psencode='iconv -t utf-16le | base64 -w 0'
+alias XXXvpn='gp-saml-gui -P --gateway XXX.XXX.XXX'
+alias ysoserial='java -jar /opt/tools/java_tools/ysoserial-master-SNAPSHOT.jar'
+alias jndi-exploit='java -jar /opt/tools/java_tools/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar'
