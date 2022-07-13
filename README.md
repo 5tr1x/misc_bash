@@ -1,1 +1,1 @@
-Random bash scripts
+Random scripts and such
