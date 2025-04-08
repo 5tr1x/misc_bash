@@ -1,10 +1,21 @@
-#Alias
+# Alias
 alias uu='apt update && apt full-upgrade && apt autoremove'
-alias uuu='apt update && apt full-upgrade && apt autoremove && nuclei -ud /opt/tools/nuclei-templates/ -ut && wpscan --update && updatedb && echo "[*] UPDATED" && echo ""'
+alias uuu='wpscan --update && nuclei -up && rm -r /opt/tools/NT/github/ && nuclei -ut && uu'
 alias http='python3 -m http.server 80'
 alias lcatch='nc -lvnp 443'
 alias wcatch='rlwrap nc -lvnp 443'
+alias ptycatch='echo "[*] use with invoke-conptyshell.ps1" && echo "[*] run in full terminal window (rows 75 cols 318)" && echo "[*] reset terminal after exit" && echo "" && stty raw -echo; (stty size; cat) | nc -lvnp 443'
 alias psencode='iconv -t utf-16le | base64 -w 0'
+alias htbvpn='openvpn /root/.htb.ovpn'
+alias pgvpn='openvpn /root/.pg.ovpn'
 alias XXXvpn='gp-saml-gui -P --gateway XXX.XXX.XXX'
-alias ysoserial='java -jar /opt/tools/java_tools/ysoserial-master-SNAPSHOT.jar'
-alias jndi-exploit='java -jar /opt/tools/java_tools/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar'
+alias ysoserial='java --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.trax=ALL-UNNAMED --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.runtime=ALL-UNNAMED --add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED -jar /opt/tools/java_tools/ysoserial-all.jar'
+alias jndi-exploit='java -jar /opt/tools/java_tools/JNDI-Exploit-Kit-1.0-SNAPSHOT-all.jar'
+alias rmg='java -jar /opt/tools/remote-method-guesser/target/rmg-5.1.0-jar-with-dependencies.jar'
+alias bh-legacy='neo4j start && sleep 5 && bloodhound && sleep 5 && neo4j stop'
+alias bh-ce='cd /opt/tools/bloodhound/ && echo '' && echo [*] localhost:7080 admin:XXXXXXXXX && echo '' && docker-compose up && cd ~-'
+alias wp-vuln-scan='wpscan --random-user-agent --api_token XXXXXXXXXXXX --url'
+
+# Function
+function PWN() { echo '[*] DEFAULT NUCLEI TEMPLATES' && echo '' && nuclei -silent -u "$@" -t network/cves/ -t network/vulnerabilities/ -t network/misconfig/ -t network/exposures/ -t http/cves/ -t http/vulnerabilities/ -t http/misconfiguration/ -t http/exposures/ -t http/exposed-panels/ -t http/miscellaneous/ -et http/misconfiguration/http-missing-security-headers.yaml,http/miscellaneous/rdap-whois.yaml,http/misconfiguration/missing-sri.yaml; }
+function PWN-EXTRA() { echo '[*] CUSTOM NUCLEI TEMPLATES' && echo '[!] USE WITH CAUTION' && echo '' && nuclei -silent -u "$@" -t github/h0tak88r/nuclei_templates/cves/ -t github/h0tak88r/nuclei_templates/panels/ -t github/h0tak88r/nuclei_templates/Others/ -mhe 120; }
